@@ -1,0 +1,54 @@
+/*Hacer que el elemento ocupe todo el alto de la pantalla restante */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+.contenedor-logo {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 1em;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    background: green;
+}
+
+.contenedor-botonesPrincipal{
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    background: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contenedor-botonesPrincipal input{
+    /*height: 114px;*/
+    height: 60px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: #0A3871;
+    border-width: thin;
+    border-radius: 10px;
+    border-color: #0A3871;
+    margin-bottom: 2em;
+    transition: 2s all;
+}
+
+.contenedor-botonesPrincipal input:hover{
+    /*height: 114px;*/
+   color: #FFFFFF;
+   background: #0A3871;
+   transform: scale(1.2);
+   cursor: pointer;
+}
