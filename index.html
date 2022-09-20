@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +21,23 @@
         <section class="contenedor-botonesPrincipal">
             <input type="button" id="startGame" value="Iniciar Juego">
             <input type="button" id="addWord" value="Agregar Nueva Palabra">
+        </section>
+
+        <section class="contenedor-agregarPalabras">
+            <div class="txt-words">
+                <label for="addWords">Ingrese una Palabra</label>
+                <input type="text" name="addWords" id="addWords">
+            </div>
+            
+            <div class="alert">
+                <img src="images/Alert.svg" alt="Alerta"><p>Máx. de 8 letras</p>
+            </div>
+
+            <div class="btn-words">
+                <input type="button" value="Guardar y Empezar">
+                <input type="button" value="Cancelar">
+            </div>
+
         </section>
     </main>
     <footer>
