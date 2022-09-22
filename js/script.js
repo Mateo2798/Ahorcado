@@ -24,6 +24,7 @@ function createSecretWord(){
     
    drawLines(secretWords[numbRandom].length);
 
+   window.onkeydown = keyDown;
    botonesPrincipal[0].style.display = "none";
    contenedorGame[0].style.display = "flex";
 }
@@ -37,6 +38,15 @@ function drawLines(number){
         divs.className = "line"
         scriptContent.appendChild(divs);
     }
+}
+
+function keyDown(e){
+    var code = e.keyCode;
+    var letra = e.key;
+    if((code >= 65 && code <= 90) | code == 192){
+        return letra;
+    }
+    return 0;
 }
 
 
