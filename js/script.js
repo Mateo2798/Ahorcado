@@ -1,7 +1,13 @@
 var startGame = document.getElementById("startGame");
 var addWord = document.getElementById("addWord");
 var saveStart = document.getElementById("saveStart");
-var cancel = document.getElementById("cancel")
+var cancel = document.getElementById("cancel");
+
+/*Contenedores */
+var botonesPrincipal =  document.getElementsByClassName("contenedor-botonesPrincipal");
+var contenedorGame = document.getElementsByClassName("contenedor-Game");
+var scriptContent = document.getElementById("contenedor-guiones");
+
 var year = document.getElementById("year");
 var secretWords = ["pajaro","avion","manzana","elefante"];
 
@@ -14,9 +20,25 @@ function yearActual(){
 
 function createSecretWord(){
     var numbRandom = Math.round(Math.random() * (secretWords.length -1));
+    console.log(secretWords[numbRandom] + " " + numbRandom)
     
-    return secretWords[numbRandom];
+   drawLines(secretWords[numbRandom].length);
+
+   botonesPrincipal[0].style.display = "none";
+   contenedorGame[0].style.display = "flex";
 }
+
+function drawLines(number){
+    scriptContent.innerHTML = "";
+
+    for(var i = 0; i < number; i++){
+        var divs = document.createElement("div");
+        divs.id = i;
+        divs.className = "line"
+        scriptContent.appendChild(divs);
+    }
+}
+
 
 startGame.addEventListener("click",createSecretWord);
 year.innerText = yearActual();
