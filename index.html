@@ -28,19 +28,22 @@
                 <label for="addWords">Ingrese una Palabra</label>
                 <input type="text" name="addWords" id="addWords">
             </div>
-        
+
             <div class="alert">
                 <img src="images/Alert.svg" alt="Alerta">
                 <p>Máx. de 8 letras</p>
             </div>
-        
+
             <div class="btn-words">
                 <input type="button" id="saveStart" value="Guardar y Empezar">
                 <input type="button" id="cancel" value="Cancelar">
             </div>
-        
+
         </section>
         <section class="contenedor-Game">
+            <div id="contenedor-canvas">
+                <canvas id="canvas"></canvas>
+            </div>
             <div id="contenedor-guiones">
                 <!--
                 <div class="line">A</div>
@@ -52,12 +55,17 @@
                 <div class="line"></div>
                 <div class="line">C</div>-->
             </div>
+            <input autofocus id="input-oculto" type="text">
+            <div class="contenedor-letrasincorrectas">
+                <div class="letter"></div>
+            </div>
         </section>
     </main>
     <footer>
         <div class="footer">&copy Copyright <span>Mateo</span> 2022 -<span id="year"></span></div>
     </footer>
     <script src="js/script.js"></script>
+    <script src="js/canvas.js"></script>
 </body>
 
 </html>
