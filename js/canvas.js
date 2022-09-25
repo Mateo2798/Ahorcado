@@ -18,9 +18,57 @@ function inicializarCanvas() {
             Y = Math.floor(H / 2);
             r = Math.floor(W / 3);
 
-            dibujarEnElCanvas(ctx);
+            dibujarLineasPrincipales(ctx);
+           /* ctx.moveTo(150, 380);
+            ctx.lineTo(150, 65);
+            ctx.lineTo(300, 65);
+            ctx.lineTo(300, 100);
+            ctx.stroke();
+            ctx.closePath();*/
         }
     }
+}
+
+function dibujarLineasPrincipales(ctx){
+    ctx.lineWidth = 5;//Ancho de linea
+    ctx.lineCap = "round";//Forma de linea, valores butt,round/square
+    ctx.strokeStyle = "#0A3871";
+
+    ctx.beginPath();
+    //Linea vertical grande -
+    ctx.moveTo(40,30);
+    ctx.lineTo(40, H-30);
+    //line vertical pequeña -
+    ctx.moveTo(W/2,30);
+    ctx.lineTo(W/2,H/4)
+    //linea horizontal pequeña |
+    ctx.moveTo(40,30);
+    ctx.lineTo(W/2,30);
+    //linea horizontal grande |
+    ctx.moveTo(20,H-30);
+    ctx.lineTo(W-50,H-30)
+    ctx.stroke();
+
+
+    //Cabeza
+    ctx.beginPath();
+    ctx.arc((W/2),(H/4) + 25,25,0, 2* Math.PI); //El + 25 dependera del radio que se de al circulo
+    //cuerpo
+    ctx.moveTo(W/2,(H/4)+50);
+    ctx.lineTo(W/2, H/1.5);
+    //Mano izquierda
+    ctx.moveTo(W/2, H/2);
+    ctx.lineTo((W/1.65), (H/1.7));
+    //Mano derecha
+    ctx.moveTo(W/2, H/2);
+    ctx.lineTo((W/2.5), (H/1.7));
+    //Pie izquierdo
+    ctx.moveTo(W/2, H/1.5);
+    ctx.lineTo((W/1.65), (H/1.3));
+    //pie derecho
+    ctx.moveTo(W/2, H/1.5);
+    ctx.lineTo((W/2.5), (H/1.3));
+    ctx.stroke();
 }
 
 function dibujarEnElCanvas(ctx) {
