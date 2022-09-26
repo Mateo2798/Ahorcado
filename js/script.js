@@ -17,9 +17,11 @@ var letter = document.getElementsByClassName("letter");
 var year = document.getElementById("year");
 
 /*Variables del juego */
+var ctx = canvas.getContext("2d");
 var palabraSecreta = "";
 var secretWords = ["pajaro", "avion", "manzana", "elefante"];
 var letrasIncorrectas = "";
+var contadorErrores = 0;
 
 function yearActual() {
     copyright = new Date();
@@ -103,6 +105,8 @@ function drawLetterAndCanvas(code, letra) {
         if (letrasIncorrectas.includes(letra.toUpperCase())) {
             letter[0].innerHTML = letrasIncorrectas;
         } else {
+            contadorErrores++;
+            dibujarAhorcado(contadorErrores);
             letrasIncorrectas += letra.toUpperCase();
             letter[0].innerHTML = letrasIncorrectas;
         }

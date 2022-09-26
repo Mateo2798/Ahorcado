@@ -159,6 +159,11 @@ body {
     justify-content: center;
 }
 
+.contenedor-letrasincorrectas{
+    margin-top: 1em;
+    box-sizing: border-box;
+}
+
 /* .contenedor-header{
     width: 100%;
     display: flex;
