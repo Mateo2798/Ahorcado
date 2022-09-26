@@ -24,9 +24,10 @@ var year = document.getElementById("year");
 /*Variables del juego */
 var ctx = canvas.getContext("2d");
 var palabraSecreta = "";
-var secretWords = ["elefante"];
+var secretWords = ["elefante", "pajaro", "barco", "alura"];
 var letrasIncorrectas = "";
 var contadorErrores = 0;
+
 
 function yearActual() {
     copyright = new Date();
@@ -100,33 +101,52 @@ function keyDown(code) {
 
 function drawLetterAndCanvas(code, letra) {
     if (keyDown(code) && palabraSecreta.includes(letra)) {
+        var espaciosLlenos = [];
         for (let i = 0; i < palabraSecreta.length; i++) {
             /*Draw letter on the line*/
             if (palabraSecreta[i] === letra) {
                 guiones[i].innerHTML = letra.toUpperCase();
             }
+            if (guiones[i].innerHTML != "") {
+                espaciosLlenos.push(i);
+                if (espaciosLlenos.length == palabraSecreta.length) {
+                    modal.style.display = "block";
+                    let etiqueta = document.getElementsByClassName("gameOver")[0];
+                    etiqueta.textContent = "";
+                    var salto = document.getElementsByClassName("palabraCorrecta")[0];
+                    salto.textContent = "Felicidades, Has ganado";
+                    salto.style.color = "green"
+                    //Iniciar Nuevo Juego luego de cometer 8 errores
+                    contadorErrores = 0;
+                    letrasIncorrectas = ""
+                    letter[0].innerHTML = letrasIncorrectas;
+                }
+            }
         }
+
+
     } else if (keyDown(code)) {
         /* Se verifica si la letra incorrecta ya ha sido presionada */
         if (letrasIncorrectas.includes(letra.toUpperCase())) {
             letter[0].innerHTML = letrasIncorrectas;
         } else {
             contadorErrores++;
-            if(contadorErrores == 8){
+            if (contadorErrores == 8) {
                 modal.style.display = "block";
                 let etiqueta = document.getElementsByClassName("gameOver")[0];
                 var salto = document.getElementsByClassName("palabraCorrecta")[0];
                 etiqueta.textContent = "GAME OVER";
                 salto.textContent = "Palabra correcta: " + palabraSecreta;
+                salto.style.color = "red"
                 //Iniciar Nuevo Juego luego de cometer 8 errores
-                contadorErrores=0;
+                contadorErrores = 0;
                 letrasIncorrectas = ""
                 letter[0].innerHTML = letrasIncorrectas;
-            }else{
+            } else {
                 dibujarAhorcado(contadorErrores);
                 letrasIncorrectas += letra.toUpperCase();
                 letter[0].innerHTML = letrasIncorrectas;
-            }  
+            }
         }
     }
 }
