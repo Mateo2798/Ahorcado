@@ -2,6 +2,7 @@ var startGame = document.getElementById("startGame");
 var addWord = document.getElementById("addWord");
 var saveStart = document.getElementById("saveStart");
 var cancel = document.getElementById("cancel");
+var nuevoJuego = document.getElementById("nuevoJuego");
 
 /*Input oculto autofocus */
 var inputOculto = document.getElementById("input-oculto");
@@ -14,12 +15,16 @@ var scriptContent = document.getElementById("contenedor-guiones");
 var guiones = document.getElementsByClassName("line");
 var letter = document.getElementsByClassName("letter");
 
+// Modal
+var modal = document.getElementById("myModal");
+var modalContent = document.getElementsByClassName("modal-content");
+
 var year = document.getElementById("year");
 
 /*Variables del juego */
 var ctx = canvas.getContext("2d");
 var palabraSecreta = "";
-var secretWords = ["pajaro", "avion", "manzana", "elefante"];
+var secretWords = ["elefante"];
 var letrasIncorrectas = "";
 var contadorErrores = 0;
 
@@ -31,6 +36,7 @@ function yearActual() {
 }
 
 function newGame() {
+    modal.style.display = "none";
     createSecretWord();
 
     setTimeout(function () {
@@ -106,12 +112,25 @@ function drawLetterAndCanvas(code, letra) {
             letter[0].innerHTML = letrasIncorrectas;
         } else {
             contadorErrores++;
-            dibujarAhorcado(contadorErrores);
-            letrasIncorrectas += letra.toUpperCase();
-            letter[0].innerHTML = letrasIncorrectas;
+            if(contadorErrores == 8){
+                modal.style.display = "block";
+                let etiqueta = document.getElementsByClassName("gameOver")[0];
+                var salto = document.getElementsByClassName("palabraCorrecta")[0];
+                etiqueta.textContent = "GAME OVER";
+                salto.textContent = "Palabra correcta: " + palabraSecreta;
+                //Iniciar Nuevo Juego luego de cometer 8 errores
+                contadorErrores=0;
+                letrasIncorrectas = ""
+                letter[0].innerHTML = letrasIncorrectas;
+            }else{
+                dibujarAhorcado(contadorErrores);
+                letrasIncorrectas += letra.toUpperCase();
+                letter[0].innerHTML = letrasIncorrectas;
+            }  
         }
     }
 }
 
 startGame.addEventListener("click", newGame);
+nuevoJuego.addEventListener("click", newGame)
 year.innerText = yearActual();
