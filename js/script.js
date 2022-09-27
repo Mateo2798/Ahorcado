@@ -2,13 +2,16 @@ var startGame = document.getElementById("startGame");
 var addWord = document.getElementById("addWord");
 var saveStart = document.getElementById("saveStart");
 var cancel = document.getElementById("cancel");
+var cancel2 = document.getElementById("cancel2");
 var nuevoJuego = document.getElementById("nuevoJuego");
 
 /*Input oculto autofocus */
 var inputOculto = document.getElementById("input-oculto");
+var addWords = document.getElementById("addWords");
 
 /*Contenedores */
 var botonesPrincipal = document.getElementsByClassName("contenedor-botonesPrincipal");
+var contenedorPalabras = document.getElementsByClassName("contenedor-agregarPalabras");
 var contenedorGame = document.getElementsByClassName("contenedor-Game");
 var wrongLetter = document.getElementsByClassName("contenedor-letrasincorrectas");
 var scriptContent = document.getElementById("contenedor-guiones");
@@ -29,6 +32,7 @@ var letrasIncorrectas = "";
 var contadorErrores = 0;
 
 
+
 function yearActual() {
     copyright = new Date();
     yearUpdate = copyright.getFullYear();
@@ -38,6 +42,7 @@ function yearActual() {
 
 function newGame() {
     modal.style.display = "none";
+    addWords.blur();
     createSecretWord();
 
     setTimeout(function () {
@@ -151,6 +156,63 @@ function drawLetterAndCanvas(code, letra) {
     }
 }
 
+function newWords(){
+    addWords.focus();
+    contenedorPalabras[0].style.display = "flex";
+    botonesPrincipal[0].style.display = "none";
+}
+
+function addNewWords(){
+    var bandera = false;
+    var nuevasPalabras = addWords.value.toUpperCase();
+    if(nuevasPalabras == ""){
+        alert("Campo vacio, por favor ingrese una palabra");
+    }else{
+        if(nuevasPalabras.length > 7){
+            alert("La palabra sobrepasa los 8 caracteres");
+            addWords.value = "";
+        }else{
+            for (let i = 0; i < nuevasPalabras.length; i++) {
+                let code = nuevasPalabras.charCodeAt(i);
+                if(!keyDown(code)){
+                    alert("La palabra solo debe de contener letras A-Z");
+                    addWords.value = "";
+                    bandera = true;
+                    break;
+                }             
+            }
+            if(!bandera){
+                addWords.value = "";
+                secretWords.push(nuevasPalabras.toLowerCase());
+                contenedorPalabras[0].style.display = "none";
+                contenedorGame[0].style.display = "flex";
+                console.log(secretWords);
+                newGame()
+            } 
+        }
+    }
+    
+}
+
+function cancelAddWords(){
+    document.onkeydown = (e) =>{
+        e.stopPropagation();
+    }
+    addWords.blur();
+    inputOculto.blur();
+    palabraSecreta = "";
+    contadorErrores = 0;
+    letrasIncorrectas = "";
+    modal.style.display = "none";
+    contenedorGame[0].style.display = "none";
+    contenedorPalabras[0].style.display = "none";
+    botonesPrincipal[0].style.display = "flex";
+}
+
 startGame.addEventListener("click", newGame);
-nuevoJuego.addEventListener("click", newGame)
+nuevoJuego.addEventListener("click", newGame);
+addWord.addEventListener("click", newWords);
+saveStart.addEventListener("click", addNewWords);
+cancel.addEventListener("click", cancelAddWords);
+cancel2.addEventListener("click", cancelAddWords);
 year.innerText = yearActual();

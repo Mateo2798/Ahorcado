@@ -76,6 +76,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 1em;
 }
 
 .txt-words label {
@@ -281,6 +282,9 @@ body {
 
     #input-oculto {
         display: inline;
+    }
+    .txt-words input {
+        width: 90%;
     }
 }
 
